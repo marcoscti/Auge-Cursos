@@ -91,22 +91,32 @@
         </form>
     </section>
     <?php
-$peso = $_POST['peso'];
-$altura = $_POST['altura'];
-$tamanho = ($altura*$altura);
-$massa = $peso / $altura;
-$nome = $_POST['nome'];
-if ($massa < 19) {
-    echo "Você está Magro";
-} elseif (($massa = 20) and ($massa < 24)) {
-    echo "Você está no pesso Ideal";
-} elseif (($massa = 25)){
-    echo "Você está acima do peso.";
-} elseif (($massa = 30)){
-    echo "Você está Obeso";
-}
-echo "<h3>$nome seu IMC se encontra em: $massa </h3>";
-?>
+    $peso = $_POST['peso'];
+    $altura = $_POST['altura'];
+    $massa = $peso / ($altura * $altura);
+    $nome = $_POST['nome'];
+
+/*
+* Correção do Algorítimo
+removi alguns parêntesis que não tinham necessidade
+corrigi a saída do imc utilizando a função number_format do php
+essa função suporta 4 parâmetros que são
+1- a variável com o número
+2- a quantidade de casas decimais(Números após o (.) ponto) que você quer para o número
+3- o sinal que representa o numero
+4- o sinal que você deseja que represente o seu numero
+*/
+    if ($massa < 20) {
+        echo "Você está Magro";
+    } elseif ($massa >= 20 && $massa <= 24.9) {
+        echo "Você está no pesso Ideal";
+    } elseif ($massa >= 24.9 && $massa <= 29.9) {
+        echo "Você está acima do peso.";
+    } elseif (($massa > 29.9)) {
+        echo "Você está Obeso";
+    }
+    echo "<h3>$nome seu IMC se encontra em:" . number_format($massa, 2, ',', '.') . " </h3>";
+    ?>
 </body>
 
 </html>
